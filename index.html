@@ -88,6 +88,19 @@ canvas{width:100%;height:210px;display:block;border-radius:8px;background:#F4F2E
 .frag-grid{display:grid;gap:4px;aspect-ratio:1;max-width:190px;margin:0 auto 1rem}
 .frag-grid div{background:var(--blue);border-radius:4px}
 
+/* SESSÃO DE QUESTÕES */
+.questions-section { padding: 4vw 6vw; background: var(--bg); border-top: 1px dashed var(--line); }
+.questions-section h3 { font-size: 1.5rem; margin-bottom: 1.5rem; color: var(--ink); }
+.q-card { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 1.5rem; margin-bottom: 1.2rem; }
+.q-text { font-size: .95rem; color: var(--ink); margin-bottom: 1rem; white-space: pre-line; }
+.q-actions { display: flex; gap: .8rem; }
+.q-btn { font-family: 'IBM Plex Mono', monospace; font-size: .75rem; padding: .6rem 1rem; border-radius: 6px; cursor: pointer; border: 1px solid var(--line); background: transparent; color: var(--ink-dim); transition: all .2s; }
+.q-btn:hover { background: rgba(0,0,0,.03); }
+.q-btn.active { border-color: var(--accent); color: var(--accent); background: rgba(0,0,0,.02); font-weight: 600; }
+.q-content { display: none; margin-top: 1rem; padding: 1rem; background: #F8F9FA; border-radius: 6px; font-size: .9rem; border-left: 3px solid var(--accent); color: #333; white-space: pre-line; }
+.q-content.show { display: block; }
+.q-table { font-family: 'IBM Plex Mono', monospace; font-size: 0.8rem; background: #f4f2ec; padding: 10px; border-radius: 5px; margin: 10px 0; }
+
 footer{padding:2.5rem 6vw 3rem;border-top:1px solid var(--line);color:var(--ink-dim);font-size:.76rem;font-family:'IBM Plex Mono',monospace}
 
 @media(max-width:820px){
@@ -140,6 +153,75 @@ footer{padding:2.5rem 6vw 3rem;border-top:1px solid var(--line);color:var(--ink-
           <svg id="energyDiagram" viewBox="0 0 320 160" width="100%" height="150"></svg>
           <div class="molecules"><div class="mol-pair" id="molPair"><div class="atom a"></div><div class="atom b"></div></div></div>
         </div>
+      </div>
+    </div>
+    
+    <!-- QUESTÕES: ENTALPIA -->
+    <div class="questions-section" style="--accent: var(--amber)">
+      <h3>📝 Pratique: Questões de Fixação</h3>
+      
+      <div class="q-card">
+        <div class="q-text"><strong>1. (Enem Reaplicação)</strong> O conteúdo de um cilindro de gás natural veicular explodiu, liberando um volume de 15 m³ de gás, que entrou em combustão. Apesar do risco de explosão, o gás natural veicular (GNV) é um combustível bastante eficiente em termos econômicos. Apresenta densidade de 0,8 kg/m³ e seu componente principal é o metano (CH4), de massa molar igual a 16 g/mol, numa concentração de 90%. É possível avaliar a energia liberada na explosão a partir das energias de ligação dos átomos envolvidos.
+        <div class="q-table">LIGAÇÃO | ENERGIA (kJ/mol)<br>C-H | 414<br>O=O | 498<br>C=O | 799<br>H-O | 460</div>
+        A energia, em quilojoule, gerada no momento da explosão é mais próxima de:</div>
+        <div class="q-actions">
+          <button class="q-btn" data-target="q1-resp">Ver Resposta</button>
+          <button class="q-btn" data-target="q1-reso">Ver Resolução</button>
+        </div>
+        <div class="q-content" id="q1-resp"><strong>Resposta:</strong> (Disponível pelo professor/gabarito oficial)</div>
+        <div class="q-content" id="q1-reso"><strong>Resolução:</strong> 1. Calcular a massa de CH4; 2. Calcular o número de mols de CH4; 3. Escrever a equação de combustão do CH4; 4. Calcular o ΔH pelas energias de ligação (rompidas - formadas); 5. Multiplicar o ΔH pelo número de mols encontrado.</div>
+      </div>
+
+      <div class="q-card">
+        <div class="q-text"><strong>2. (Uerj)</strong> A reação química entre metano e cloro molecular produz ácido clorídrico e diclorometano, sendo este segundo composto empregado como solvente em processos industriais. Os valores de energia de ligação envolvidos na reação estão apresentados na tabela a seguir.
+        <div class="q-table">LIGAÇÃO | ENERGIA (kJ/mol)<br>C-H | 410<br>Cl-Cl | 240<br>C-Cl | 330<br>H-Cl | 430</div>
+        A energia, em quilojoules, liberada na formação de 1,0 mol de diclorometano é igual a:</div>
+        <div class="q-actions">
+          <button class="q-btn" data-target="q2-resp">Ver Resposta</button>
+          <button class="q-btn" data-target="q2-reso">Ver Resolução</button>
+        </div>
+        <div class="q-content" id="q2-resp"><strong>Resposta:</strong> (Disponível pelo professor/gabarito oficial)</div>
+        <div class="q-content" id="q2-reso"><strong>Resolução:</strong> Equação: CH4 + 2Cl2 → CH2Cl2 + 2HCl. Quebram-se 2 ligações C-H e 2 Cl-Cl. Formam-se 2 ligações C-Cl e 2 H-Cl. ΔH = Energia absorvida (quebra) - Energia liberada (formação).</div>
+      </div>
+
+      <div class="q-card">
+        <div class="q-text"><strong>3. (Fmp)</strong> O clorofórmio ou triclorometano é um composto orgânico de fórmula CHCl3, usado como anestésico. A reação mais importante do clorofórmio é a mistura com fluoreto de hidrogênio, produzindo CFC-22, um precursor na produção de Teflon, como apresentado a seguir:
+        CHCl3 + 2HF → CHClF2 + 2HCl (ΔH = -44 kJ/mol)
+        <div class="q-table">LIGAÇÃO | ENERGIA (kJ/mol)<br>C-H | 413<br>C-Cl | 330<br>H-F | 568<br>C-F | 488</div>
+        Fazendo uso das informações contidas na Tabela acima, a energia de ligação em kJ/mol para a ligação H - Cl é igual a:</div>
+        <div class="q-actions">
+          <button class="q-btn" data-target="q3-resp">Ver Resposta</button>
+          <button class="q-btn" data-target="q3-reso">Ver Resolução</button>
+        </div>
+        <div class="q-content" id="q3-resp"><strong>Resposta:</strong> (Disponível pelo professor/gabarito oficial)</div>
+        <div class="q-content" id="q3-reso"><strong>Resolução:</strong> Equacionar a soma das energias rompidas e formadas, igualando ao ΔH fornecido (-44 kJ/mol). A única incógnita será o valor da ligação H-Cl. Resolva a equação para encontrar o valor.</div>
+      </div>
+      
+      <div class="q-card">
+        <div class="q-text"><strong>4. (Fuvest)</strong> O tricloreto de nitrogênio (NCl3), ou tricloramina, é um composto de aparência oleosa muito perigoso quando puro, pois se decompõe explosivamente formando N2 e Cl2.
+        Pede-se:
+        a) Represente a molécula do NCl3 utilizando fórmula de Lewis.
+        b) Escreva a equação balanceada para a decomposição do NCl3 em N2 e Cl2. Qual é o número de oxidação do nitrogênio no reagente e no produto?
+        c) Calcule a entalpia da reação de decomposição do NCl3, considerando os valores de energia de ligação fornecidos (N≡N: 940, Cl-Cl: 240, N-Cl: 200). A reação é endotérmica ou exotérmica?</div>
+        <div class="q-actions">
+          <button class="q-btn" data-target="q4-resp">Ver Resposta</button>
+          <button class="q-btn" data-target="q4-reso">Ver Resolução</button>
+        </div>
+        <div class="q-content" id="q4-resp"><strong>Resposta:</strong> a) Estrutura com N central (1 par livre) e 3 Cl ao redor. b) 2 NCl3 → N2 + 3 Cl2 (Nóx de +3 para 0). c) Reação exotérmica.</div>
+        <div class="q-content" id="q4-reso"><strong>Resolução:</strong> Na letra C, rompem-se 6 ligações N-Cl (absorve 1200 kJ). Formam-se 1 N≡N e 3 Cl-Cl (libera 940 + 720 = 1660 kJ). ΔH = 1200 - 1660 = -460 kJ (Exotérmica).</div>
+      </div>
+      
+      <div class="q-card">
+        <div class="q-text"><strong>5. (Enem PPL)</strong> O gás hidrogênio é considerado um ótimo combustível - o único produto da combustão desse gás é o vapor de água, como mostrado na equação química: 2H2(g) + O2(g) → 2H2O(g).
+        Um cilindro contém 1kg de hidrogênio e todo esse gás foi queimado.
+        (Energias: H-H = 437, H-O = 463, O=O = 494).
+        Qual é a variação da entalpia, em quilojoule, da reação de combustão do hidrogênio contido no cilindro?</div>
+        <div class="q-actions">
+          <button class="q-btn" data-target="q5-resp">Ver Resposta</button>
+          <button class="q-btn" data-target="q5-reso">Ver Resolução</button>
+        </div>
+        <div class="q-content" id="q5-resp"><strong>Resposta:</strong> (Disponível pelo professor/gabarito oficial)</div>
+        <div class="q-content" id="q5-reso"><strong>Resolução:</strong> 1. Calcule o ΔH para a equação balanceada dada (2 mols de H2). 2. Calcule quantos mols existem em 1kg (1000g) de H2 (massa molar 2g/mol = 500 mols). 3. Faça uma regra de três para descobrir a energia liberada por 500 mols.</div>
       </div>
     </div>
   </section>
@@ -197,6 +279,80 @@ footer{padding:2.5rem 6vw 3rem;border-top:1px solid var(--line);color:var(--ink-
         </div></div>
       </div>
     </div>
+    
+    <!-- QUESTÕES: RAPIDEZ -->
+    <div class="questions-section" style="--accent: var(--blue)">
+      <h3>📝 Pratique: Questões de Fixação</h3>
+      
+      <div class="q-card">
+        <div class="q-text"><strong>1. (Ufam-psc)</strong> Um dos fatores que alteram a velocidade das reações é o uso de um catalisador, pois ele acelera uma reação porque:</div>
+        <div class="q-actions">
+          <button class="q-btn" data-target="qc1-resp">Ver Resposta</button>
+          <button class="q-btn" data-target="qc1-reso">Ver Resolução</button>
+        </div>
+        <div class="q-content" id="qc1-resp"><strong>Resposta:</strong> diminui a energia de ativação da reação.</div>
+        <div class="q-content" id="qc1-reso"><strong>Resolução:</strong> O catalisador atua criando um caminho alternativo para a reação, o qual exige uma menor Energia de Ativação (Ea). Com uma barreira energética menor, um número maior de partículas consegue reagir, aumentando a velocidade.</div>
+      </div>
+
+      <div class="q-card">
+        <div class="q-text"><strong>3. (Pucrs)</strong> Na coluna I estão relacionadas transformações e, na coluna II, os principais fatores que alteram a velocidade dessas transformações.
+        COLUNA I
+        1. A transformação do leite em iogurte é rápida quando aquecida.
+        2. Um comprimido efervescente reage mais rapidamente quando dissolvido em água do que acondicionado em lugares úmidos.
+        3. Grânulos de Mg reagem com HCl mais rapidamente do que em lâminas.
+        4. A transformação do açúcar, contido na uva, em etanol ocorre mais rapidamente na presença de microorganismo.
+        
+        COLUNA II
+        ( ) superfície de contato
+        ( ) temperatura
+        ( ) catalisador
+        ( ) concentração dos reagentes
+        
+        Relacionando-se as duas colunas obtêm-se, de cima para baixo, os números na sequência:</div>
+        <div class="q-actions">
+          <button class="q-btn" data-target="qc3-resp">Ver Resposta</button>
+          <button class="q-btn" data-target="qc3-reso">Ver Resolução</button>
+        </div>
+        <div class="q-content" id="qc3-resp"><strong>Resposta:</strong> (Disponível pelo professor/gabarito oficial)</div>
+        <div class="q-content" id="qc3-reso"><strong>Resolução:</strong> Grânulos vs Lâminas remete à superfície de contato. Aquecimento remete à temperatura. Microorganismos agem como catalisadores biológicos (enzimas). Dissolver efervescente envolve íons livres (concentração/estado).</div>
+      </div>
+
+      <div class="q-card">
+        <div class="q-text"><strong>5. (Uea-sis)</strong> A boa digestão dos alimentos favorece o melhor aproveitamento dos seus nutrientes e deve ocorrer de forma rápida, permitindo o esvaziamento gástrico e o bom funcionamento intestinal. Os médicos recomendam evitar a ingestão de água, ou líquidos de modo geral, durante as refeições e mastigar bem os alimentos antes de os engolir. Considerando-se que, no processo da digestão, ocorrem reações químicas envolvendo o suco gástrico e o bolo alimentar, a ingestão de líquidos causa ________ da velocidade das reações e a mastigação causa ________ da velocidade das reações, porque, com a mastigação, a superfície de contato dos alimentos para interagir com o suco gástrico ________.
+        As lacunas são preenchidas, respectivamente, por:</div>
+        <div class="q-actions">
+          <button class="q-btn" data-target="qc5-resp">Ver Resposta</button>
+          <button class="q-btn" data-target="qc5-reso">Ver Resolução</button>
+        </div>
+        <div class="q-content" id="qc5-resp"><strong>Resposta:</strong> (Disponível pelo professor/gabarito oficial)</div>
+        <div class="q-content" id="qc5-reso"><strong>Resolução:</strong> Beber líquidos dilui o suco gástrico, diminuindo a concentração e, consequentemente, a velocidade. Mastigar fragmenta o alimento, aumentando a superfície de contato e a velocidade.</div>
+      </div>
+      
+      <div class="q-card">
+        <div class="q-text"><strong>10. (Udesc)</strong> O gráfico refere-se ao diagrama energético de uma reação química, no qual se veem destacados dois caminhos de reação [Gráfico fornecido no material original indicando um pico maior e um menor]. Após uma análise das entalpias dos reagentes, dos produtos e dos valores, pode-se afirmar que a:</div>
+        <div class="q-actions">
+          <button class="q-btn" data-target="qc10-resp">Ver Resposta</button>
+          <button class="q-btn" data-target="qc10-reso">Ver Resolução</button>
+        </div>
+        <div class="q-content" id="qc10-resp"><strong>Resposta:</strong> (Disponível pelo professor/gabarito oficial)</div>
+        <div class="q-content" id="qc10-reso"><strong>Resolução:</strong> Analise se a energia dos produtos é maior (endotérmica) ou menor (exotérmica) que a dos reagentes. O catalisador sempre representa a curva de menor energia de ativação (menor pico). O ΔH não muda com o uso de catalisadores.</div>
+      </div>
+      
+      <div class="q-card">
+        <div class="q-text"><strong>17. (Uem)</strong> Sobre cinética química, assinale o que for correto.
+        01) Um aumento de temperatura de uma reação química aumenta o número de partículas reagentes com energia maior ou igual à energia de ativação.
+        02) Molecularidade é o número mínimo de partículas reagentes que precisa colidir para que ocorra uma reação elementar ou uma etapa de uma reação não elementar.
+        04) Quanto menor for o número de ligações a serem rompidas nos reagentes, mais lenta será a reação.
+        08) Quando as ordens da reação forem diferentes dos coeficientes estequiométricos para cada reagente, significa que houve algum erro nas determinações experimentais.
+        16) A adição de um catalisador ao sistema aumenta a velocidade da reação porque fornece um caminho de reação alternativo com menor energia de ativação.</div>
+        <div class="q-actions">
+          <button class="q-btn" data-target="qc17-resp">Ver Resposta</button>
+          <button class="q-btn" data-target="qc17-reso">Ver Resolução</button>
+        </div>
+        <div class="q-content" id="qc17-resp"><strong>Resposta:</strong> (Disponível pelo professor/gabarito oficial - Soma das corretas)</div>
+        <div class="q-content" id="qc17-reso"><strong>Resolução:</strong> Avalie afirmativa por afirmativa. A 01 está correta (teoria cinética). A 04 está incorreta (menos ligações para romper costuma facilitar/acelerar). A 08 está incorreta (reações não elementares possuem ordens que não coincidem com os coeficientes globais). A 16 está correta.</div>
+      </div>
+    </div>
   </section>
 
   <!-- TAB 3 — COLISÕES -->
@@ -214,6 +370,43 @@ footer{padding:2.5rem 6vw 3rem;border-top:1px solid var(--line);color:var(--ink-
           <label class="catalyst-toggle"><input type="checkbox" id="catalyst"> Catalisador ativado (reduz Ea)</label>
           <div class="stat-row"><div class="stat"><div class="n" id="statEffPct">0%</div><div class="l">COLISÕES EFETIVAS</div></div><div class="stat"><div class="n" id="statEa">Ea alta</div><div class="l">BARREIRA</div></div></div>
         </div>
+      </div>
+    </div>
+    
+    <!-- QUESTÕES: COLISÕES -->
+    <div class="questions-section" style="--accent: var(--violet)">
+      <h3>📝 Pratique: Questões de Fixação</h3>
+      
+      <div class="q-card">
+        <div class="q-text"><strong>13. (Fuvest)</strong> O cientista Richard Feynman, prêmio Nobel de Física em 1965, fez comentários sobre o processo de combustão em uma entrevista chamada Fun to Imagine. Segundo ele, à primeira vista, é impressionante pensar que os átomos de carbono de uma árvore não entram em combustão com o oxigênio da atmosfera de forma espontânea, já que existe uma grande afinidade entre essas espécies para a formação de CO2. Entretanto, quando a reação tem início, o fogo se espalha facilmente. Essa aparente contradição pode ser explicada pois:</div>
+        <div class="q-actions">
+          <button class="q-btn" data-target="qco13-resp">Ver Resposta</button>
+          <button class="q-btn" data-target="qco13-reso">Ver Resolução</button>
+        </div>
+        <div class="q-content" id="qco13-resp"><strong>Resposta:</strong> (Disponível pelo professor/gabarito oficial)</div>
+        <div class="q-content" id="qco13-reso"><strong>Resolução:</strong> Para que uma combustão se inicie (apesar de termodinamicamente favorável), as colisões entre as moléculas precisam atingir a Energia de Ativação. Isso é fornecido por uma faísca ou chama inicial. Depois de iniciada, a reação exotérmica libera calor suficiente para manter as colisões subsequentes acima da energia de ativação.</div>
+      </div>
+      
+      <div class="q-card">
+        <div class="q-text"><strong>18. (Ufjf-pism)</strong> Segundo a Teoria das colisões moleculares, existem fatores que influenciam na velocidade de uma reação química e que estão diretamente ligados a essas colisões. Sobre a velocidade das reações químicas, assinale a alternativa CORRETA:</div>
+        <div class="q-actions">
+          <button class="q-btn" data-target="qco18-resp">Ver Resposta</button>
+          <button class="q-btn" data-target="qco18-reso">Ver Resolução</button>
+        </div>
+        <div class="q-content" id="qco18-resp"><strong>Resposta:</strong> (Disponível pelo professor/gabarito oficial)</div>
+        <div class="q-content" id="qco18-reso"><strong>Resolução:</strong> Apenas os choques eficazes (com energia e geometria corretas) resultam em reação. Fatores como temperatura, concentração e superfície de contato aumentam o número total de colisões ou a energia das mesmas, incrementando a probabilidade de choques efetivos.</div>
+      </div>
+
+      <div class="q-card">
+        <div class="q-text"><strong>20. (Ufrgs)</strong> Uma professora, ao introduzir o conceito de energia de ativação, projetou em sua aula o seguinte modelo teórico.
+        [Esquema: Colisão conectada a "Eficaz: Quebra de Ligações", "Energia Suficiente (Ea)", "Agitação Térmica" e "Orientação Adequada"]
+        As teorias que sustentam esse modelo teórico, para explicar a influência de certos fatores na velocidade de uma reação química, são as:</div>
+        <div class="q-actions">
+          <button class="q-btn" data-target="qco20-resp">Ver Resposta</button>
+          <button class="q-btn" data-target="qco20-reso">Ver Resolução</button>
+        </div>
+        <div class="q-content" id="qco20-resp"><strong>Resposta:</strong> (Disponível pelo professor/gabarito oficial)</div>
+        <div class="q-content" id="qco20-reso"><strong>Resolução:</strong> O modelo baseia-se na "Teoria das Colisões" (que exige geometria e energia mínimas) e no conceito do "Complexo Ativado" (estado de transição de alta energia onde ligações antigas se rompem e novas se formam).</div>
       </div>
     </div>
   </section>
@@ -288,6 +481,24 @@ footer{padding:2.5rem 6vw 3rem;border-top:1px solid var(--line);color:var(--ink-
   window.addEventListener('resize', function(){ placeIndicator(btns[current], true); });
   requestAnimationFrame(function(){ placeIndicator(btns[0], true); });
 })();
+
+/* ---------- Toggle das Questões ---------- */
+document.querySelectorAll('.q-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    const targetId = this.dataset.target;
+    const content = document.getElementById(targetId);
+    const card = this.closest('.q-card');
+    const isShowing = content.classList.contains('show');
+    
+    card.querySelectorAll('.q-content').forEach(c => c.classList.remove('show'));
+    card.querySelectorAll('.q-btn').forEach(b => b.classList.remove('active'));
+    
+    if (!isShowing) {
+      content.classList.add('show');
+      this.classList.add('active');
+    }
+  });
+});
 
 /* ---------- energy diagram (entalpia tab) ---------- */
 (function(){
