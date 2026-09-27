@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cinética Química — Um estudo em movimento</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FAF9F6; --ink:#181A17; --ink-dim:#6B716A; --line:#E3E0D8;
+  --amber:#C96A2E; --blue:#2A7DA8; --violet:#8358B0;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*{box-sizing:inherit}
+html,body{background:var(--bg);margin:0;height:100%}
+body{color:var(--ink);font-family:'IBM Plex Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:'Fraunces',serif;font-weight:500;margin:0}
+p{line-height:1.55;margin:0 0 0.9em}
+
+/* TOP NAV / TABS */
+.topnav{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:var(--bg);border-bottom:1px solid var(--line);padding:.85rem 6vw;display:flex;align-items:center;justify-content:space-between;flex-wrap:nowrap;gap:.8rem}
+.brand{font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--ink-dim);letter-spacing:.03em;white-space:nowrap}
+.tabs{position:relative;display:flex;gap:.2rem;background:#F0EEE7;padding:.28rem;border-radius:999px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;max-width:100%}
+.tabs::-webkit-scrollbar{display:none}
+.tab-indicator{position:absolute;top:.28rem;bottom:.28rem;left:.28rem;width:120px;border-radius:999px;z-index:1;background:var(--amber);transition:left .5s cubic-bezier(.65,0,.35,1), width .5s cubic-bezier(.65,0,.35,1), transform .25s ease;}
+.tab-btn{position:relative;z-index:2;border:none;background:transparent;font-family:'IBM Plex Sans',sans-serif;font-size:.8rem;font-weight:500;padding:.6rem 1.1rem;border-radius:999px;cursor:pointer;color:var(--ink-dim);transition:color .35s;white-space:nowrap;flex:0 0 auto}
+.tab-btn.active{color:#fff}
+
+/* SLIDING VIEWPORT */
+.tab-viewport{position:relative;height:calc(100vh - var(--nav-h, 74px));height:calc(100dvh - var(--nav-h, 74px));overflow:hidden}
+.tab-panel{position:absolute;inset:0;overflow-y:auto;transform:translateX(100%);opacity:0;transition:transform .55s cubic-bezier(.65,0,.35,1), opacity .35s;pointer-events:none}
+.tab-panel.active{transform:translateX(0);opacity:1;pointer-events:auto}
+.tab-panel.prev{transform:translateX(-100%);opacity:0}
+
+.panel-inner{display:flex;flex-wrap:wrap;min-height:100%}
+.panel-inner .text,.panel-inner .visual{flex:1 1 480px;padding:4vw 6vw;min-width:300px}
+.panel-inner .visual{display:flex;flex-direction:column;justify-content:center;background:var(--surface,#F2F0EA)}
+.tab-panel[data-tab="entalpia"] .visual{--surface:#F7EEE5}
+.tab-panel[data-tab="colisoes"] .visual{--surface:#F1ECF6}
+
+.kicker{display:flex;align-items:center;gap:.55rem;margin-bottom:1rem}
+.kicker .dot{width:9px;height:9px;border-radius:50%}
+.kicker span{font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--ink-dim)}
+.text h2{font-size:clamp(1.5rem,3vw,2.1rem);margin-bottom:1rem;max-width:16ch}
+.text p.body{color:#454B44;max-width:48ch;font-size:.98rem}
+.text strong{color:var(--ink);font-weight:600}
+
+.formula-box{margin:1.3rem 0;padding:.9rem 1.1rem;background:rgba(0,0,0,.03);border:1px solid var(--line);border-radius:8px;font-family:'IBM Plex Mono',monospace;font-size:.92rem;color:var(--ink)}
+.factor-list{list-style:none;padding:0;margin:1rem 0;display:flex;flex-wrap:wrap;gap:.5rem}
+.factor-list li{font-family:'IBM Plex Mono',monospace;font-size:.75rem;padding:.35rem .7rem;border:1px solid var(--line);border-radius:20px;color:var(--ink-dim)}
+
+.diagram-card,.sim-card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:1.3rem}
+.toggle-row{display:flex;gap:.5rem;margin-bottom:1rem}
+.toggle-row button{font-family:'IBM Plex Mono',monospace;font-size:.72rem;padding:.5rem .9rem;background:transparent;border:1px solid var(--line);color:var(--ink-dim);border-radius:20px;cursor:pointer}
+.toggle-row button.active{border-color:var(--amber);color:var(--amber);background:rgba(201,106,46,.08)}
+.molecules{display:flex;justify-content:center;gap:1.2rem;margin-top:1rem}
+.atom{width:26px;height:26px;border-radius:50%;transition:transform .8s ease}
+.atom.a{background:var(--amber)} .atom.b{background:#E8B98A}
+.mol-pair{display:flex;align-items:center;gap:2px;transition:gap .8s ease}
+.mol-pair.broken{gap:22px}
+
+canvas{width:100%;height:210px;display:block;border-radius:8px;background:#F4F2EC;border:1px solid var(--line)}
+.controls{display:flex;flex-wrap:wrap;gap:1.2rem;margin-top:1rem}
+.control{flex:1;min-width:140px}
+.control label{display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--ink-dim);margin-bottom:.4rem}
+.control input[type=range]{width:100%;accent-color:var(--accent,var(--blue))}
+.stat-row{display:flex;gap:1.3rem;margin-top:.9rem;flex-wrap:wrap}
+.stat{font-family:'IBM Plex Mono',monospace}
+.stat .n{font-size:1.25rem;color:var(--ink)}
+.stat .l{font-size:.65rem;color:var(--ink-dim)}
+.catalyst-toggle{display:flex;align-items:center;gap:.5rem;margin-top:.9rem;font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--ink-dim);cursor:pointer}
+.catalyst-toggle input{accent-color:var(--violet)}
+
+/* RAPIDEZ — factor breakdown */
+.panel-inner.single{display:block;padding:3vw 6vw 5vw}
+.intro{max-width:62ch;margin-bottom:1rem}
+.factor-card{display:flex;flex-wrap:wrap;gap:2rem;border-top:1px solid var(--line);padding:2.3rem 0}
+.factor-card .factor-text{flex:1 1 320px}
+.factor-card .factor-sim{flex:1 1 360px}
+.factor-text .fnum{font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--ink-dim);margin-bottom:.4rem;display:block}
+.factor-text h3{font-size:1.1rem;margin-bottom:.5rem}
+.factor-text p{color:#454B44;font-size:.92rem;max-width:40ch}
+
+.frag-grid{display:grid;gap:4px;aspect-ratio:1;max-width:190px;margin:0 auto 1rem}
+.frag-grid div{background:var(--blue);border-radius:4px}
+
+footer{padding:2.5rem 6vw 3rem;border-top:1px solid var(--line);color:var(--ink-dim);font-size:.76rem;font-family:'IBM Plex Mono',monospace}
+
+@media(max-width:820px){
+  .brand{display:none}
+  .panel-inner .text,.panel-inner .visual{padding:6vw 6vw}
+  .factor-card{gap:1.2rem;padding:1.8rem 0}
+  canvas{height:170px}
+  .diagram-card,.sim-card{padding:1rem}
+  .toggle-row button{padding:.55rem .8rem;font-size:.7rem}
+  .control input[type=range]{height:1.6rem}
+  .formula-box{font-size:.82rem;word-break:break-word}
+}
+@media(max-width:420px){
+  .tab-btn{font-size:.74rem;padding:.55rem .85rem}
+  canvas{height:150px}
+}
+@media (prefers-reduced-motion: reduce){ .tab-panel,.atom,.mol-pair,.tab-indicator{transition:none} }
+</style>
+</head>
+<body>
+
+<header class="topnav">
+  <div class="brand">CINÉTICA QUÍMICA</div>
+  <div class="tabs" id="tabs">
+    <span class="tab-indicator" id="indicator"></span>
+    <button class="tab-btn active" data-tab="entalpia" data-accent="var(--amber)">Entalpia de ligação</button>
+    <button class="tab-btn" data-tab="rapidez" data-accent="var(--blue)">Rapidez de reação</button>
+    <button class="tab-btn" data-tab="colisoes" data-accent="var(--violet)">Teoria das colisões</button>
+  </div>
+</header>
+
+<div class="tab-viewport" id="viewport">
+
+  <!-- TAB 1 — ENTALPIA -->
+  <section class="tab-panel active" data-tab="entalpia">
+    <div class="panel-inner">
+      <div class="text">
+        <div class="kicker"><span class="dot" style="background:var(--amber)"></span><span>ENTALPIA DE LIGAÇÃO</span></div>
+        <h2>Toda ligação guarda energia — e custa energia para quebrá-la.</h2>
+        <p class="body"><strong>Entalpia de ligação</strong> é a energia necessária para romper 1 mol de uma ligação química no estado gasoso. Romper uma ligação <strong>sempre</strong> absorve energia; formar uma ligação <strong>sempre</strong> libera.</p>
+        <div class="formula-box">ΔH = Σ(ligações quebradas) − Σ(ligações formadas)</div>
+        <p class="body">Se o resultado for negativo, a reação é <strong>exotérmica</strong>. Se for positivo, é <strong>endotérmica</strong>.</p>
+      </div>
+      <div class="visual">
+        <div class="diagram-card">
+          <div class="toggle-row">
+            <button class="active" data-mode="exo">Exotérmica</button>
+            <button data-mode="endo">Endotérmica</button>
+          </div>
+          <svg id="energyDiagram" viewBox="0 0 320 160" width="100%" height="150"></svg>
+          <div class="molecules"><div class="mol-pair" id="molPair"><div class="atom a"></div><div class="atom b"></div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TAB 2 — RAPIDEZ -->
+  <section class="tab-panel" data-tab="rapidez">
+    <div class="panel-inner single">
+      <div class="intro">
+        <div class="kicker"><span class="dot" style="background:var(--blue)"></span><span>RAPIDEZ DE REAÇÃO</span></div>
+        <h2>Velocidade é a variação de concentração ao longo do tempo.</h2>
+        <p class="body">A <strong>velocidade média</strong> mede quanto a concentração de um reagente cai — ou de um produto sobe — por unidade de tempo.</p>
+        <div class="formula-box">Vm = |Δ[concentração]| / Δt · mol/(L·s)</div>
+        <p class="body">Cinco fatores aceleram uma reação. Cada um tem sua própria simulação abaixo.</p>
+      </div>
+
+      <div class="factor-card">
+        <div class="factor-text"><span class="fnum">01 · TEMPERATURA</span><h3>Mais calor, mais colisões efetivas</h3><p>Aquecer o sistema aumenta a energia cinética das moléculas, então mais colisões atingem a energia de ativação por segundo.</p></div>
+        <div class="factor-sim"><div class="sim-card" style="--accent:var(--blue)"><canvas id="simTemp"></canvas>
+          <div class="controls"><div class="control"><label>Temperatura <span id="tempLabel">50%</span></label><input type="range" id="tempSlider" min="10" max="100" value="50"></div></div>
+          <div class="stat-row"><div class="stat"><div class="n" id="statTemp">0</div><div class="l">COLISÕES EFETIVAS/S</div></div></div>
+        </div></div>
+      </div>
+
+      <div class="factor-card">
+        <div class="factor-text"><span class="fnum">02 · CONCENTRAÇÃO</span><h3>Mais partículas, mais encontros</h3><p>Com mais moléculas de reagente no mesmo volume, a chance de colisão por segundo cresce.</p></div>
+        <div class="factor-sim"><div class="sim-card" style="--accent:var(--blue)"><canvas id="simConc"></canvas>
+          <div class="controls"><div class="control"><label>Concentração <span id="concLabel">16</span></label><input type="range" id="concSlider" min="6" max="40" value="16"></div></div>
+          <div class="stat-row"><div class="stat"><div class="n" id="statConc">0</div><div class="l">COLISÕES EFETIVAS/S</div></div></div>
+        </div></div>
+      </div>
+
+      <div class="factor-card">
+        <div class="factor-text"><span class="fnum">03 · SUPERFÍCIE DE CONTATO</span><h3>Fragmentar expõe mais área</h3><p>Um sólido em pedaços menores expõe mais área ao reagente que o cerca, acelerando a reação.</p></div>
+        <div class="factor-sim"><div class="sim-card">
+          <div class="frag-grid" id="fragGrid"><div></div></div>
+          <div class="controls"><div class="control"><label>Fragmentação <span id="fragLabel">1×1</span></label><input type="range" id="fragSlider" min="1" max="5" value="1" style="--accent:var(--blue)"></div></div>
+          <div class="stat-row"><div class="stat"><div class="n" id="fragArea">100%</div><div class="l">ÁREA EXPOSTA RELATIVA</div></div></div>
+        </div></div>
+      </div>
+
+      <div class="factor-card">
+        <div class="factor-text"><span class="fnum">04 · CATALISADOR</span><h3>Um atalho com menos energia</h3><p>O catalisador não muda a temperatura — ele abre um caminho com energia de ativação menor, sem ser consumido.</p></div>
+        <div class="factor-sim"><div class="sim-card">
+          <svg id="catDiagram" viewBox="0 0 300 130" width="100%" height="115"></svg>
+          <label class="catalyst-toggle"><input type="checkbox" id="catToggle"> Ativar catalisador</label>
+          <div class="stat-row"><div class="stat"><div class="n" id="catEaVal">80 kJ/mol</div><div class="l">ENERGIA DE ATIVAÇÃO</div></div></div>
+        </div></div>
+      </div>
+
+      <div class="factor-card">
+        <div class="factor-text"><span class="fnum">05 · PRESSÃO (GASES)</span><h3>Menos volume, mais choques</h3><p>Comprimir um gás aproxima as moléculas — o mesmo número de partículas colide com mais frequência num espaço menor.</p></div>
+        <div class="factor-sim"><div class="sim-card" style="--accent:var(--blue)"><canvas id="simPress"></canvas>
+          <div class="controls"><div class="control"><label>Compressão <span id="pressLabel">Baixa</span></label><input type="range" id="pressSlider" min="0" max="70" value="0"></div></div>
+          <div class="stat-row"><div class="stat"><div class="n" id="statPress">0</div><div class="l">COLISÕES EFETIVAS/S</div></div></div>
+        </div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TAB 3 — COLISÕES -->
+  <section class="tab-panel" data-tab="colisoes">
+    <div class="panel-inner">
+      <div class="text">
+        <div class="kicker"><span class="dot" style="background:var(--violet)"></span><span>TEORIA DAS COLISÕES</span></div>
+        <h2>Nem toda colisão vira reação.</h2>
+        <p class="body">Uma colisão só é <strong>efetiva</strong> quando tem energia igual ou maior que a <strong>energia de ativação (Ea)</strong> e <strong>orientação geométrica</strong> adequada.</p>
+        <p class="body">Partículas que colidem forte o bastante acendem em verde; as demais, em vermelho. Ligue o catalisador e veja a barreira baixar.</p>
+      </div>
+      <div class="visual">
+        <div class="sim-card" style="--accent:var(--violet)"><canvas id="simColisoes"></canvas>
+          <div class="controls"><div class="control"><label>Temperatura <span id="tempCLabel">50%</span></label><input type="range" id="tempC" min="10" max="100" value="50"></div></div>
+          <label class="catalyst-toggle"><input type="checkbox" id="catalyst"> Catalisador ativado (reduz Ea)</label>
+          <div class="stat-row"><div class="stat"><div class="n" id="statEffPct">0%</div><div class="l">COLISÕES EFETIVAS</div></div><div class="stat"><div class="n" id="statEa">Ea alta</div><div class="l">BARREIRA</div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+<footer>Cinética Química · entalpia de ligação, rapidez de reação e teoria das colisões</footer>
+
+<script>
+/* ---------- responsive nav height ---------- */
+(function(){
+  var nav = document.querySelector('.topnav');
+  function setNavH(){ document.documentElement.style.setProperty('--nav-h', nav.offsetHeight+'px'); }
+  setNavH();
+  window.addEventListener('resize', setNavH);
+  window.addEventListener('orientationchange', setNavH);
+})();
+
+/* ---------- tabs + droplet indicator ---------- */
+(function(){
+  var btns = document.querySelectorAll('.tab-btn');
+  var panels = document.querySelectorAll('.tab-panel');
+  var indicator = document.getElementById('indicator');
+  var order = ['entalpia','rapidez','colisoes'];
+  var current = 0;
+
+  function placeIndicator(btn, instant){
+    var r = btn.getBoundingClientRect(), pr = btn.parentElement.getBoundingClientRect();
+    indicator.style.transition = instant ? 'none' : '';
+    indicator.style.left = (r.left - pr.left) + 'px';
+    indicator.style.width = r.width + 'px';
+    indicator.style.background = getComputedStyle(btn).getPropertyValue ? btn.dataset.accent : '';
+    indicator.style.background = btn.dataset.accent;
+  }
+
+  function bridgeThenSettle(oldBtn, newBtn){
+    var or = oldBtn.getBoundingClientRect(), nr = newBtn.getBoundingClientRect(), pr = oldBtn.parentElement.getBoundingClientRect();
+    var left = Math.min(or.left, nr.left) - pr.left;
+    var width = Math.max(or.right, nr.right) - Math.min(or.left, nr.left);
+    indicator.style.left = left + 'px';
+    indicator.style.width = width + 'px';
+    indicator.style.background = newBtn.dataset.accent;
+    setTimeout(function(){ placeIndicator(newBtn); }, 230);
+  }
+
+  btns.forEach(function(btn, i){
+    btn.addEventListener('click', function(){
+      var newIndex = order.indexOf(btn.dataset.tab);
+      if(newIndex === current) return;
+      var dir = newIndex > current ? 1 : -1;
+      btns.forEach(function(b){b.classList.remove('active')});
+      btn.classList.add('active');
+      btn.scrollIntoView({behavior:'smooth', inline:'center', block:'nearest'});
+      var oldBtn = btns[current];
+      panels.forEach(function(p){
+        if(p.dataset.tab === btn.dataset.tab){
+          p.style.transform = 'translateX(' + (dir*100) + '%)';
+          p.getBoundingClientRect();
+          requestAnimationFrame(function(){ p.classList.add('active'); p.classList.remove('prev'); p.style.transform=''; });
+        } else if(p.classList.contains('active')){
+          p.classList.remove('active');
+          p.classList.add('prev');
+          p.style.transform = '';
+        } else {
+          p.style.transform = 'translateX(' + (dir*100) + '%)';
+        }
+      });
+      bridgeThenSettle(oldBtn, btn);
+      current = newIndex;
+    });
+  });
+
+  window.addEventListener('resize', function(){ placeIndicator(btns[current], true); });
+  requestAnimationFrame(function(){ placeIndicator(btns[0], true); });
+})();
+
+/* ---------- energy diagram (entalpia tab) ---------- */
+(function(){
+  var svg = document.getElementById('energyDiagram');
+  var pair = document.getElementById('molPair');
+  var buttons = document.querySelectorAll('.toggle-row button');
+  function draw(mode){
+    var startY = mode==='exo' ? 110 : 90;
+    var endY   = mode==='exo' ? 70  : 120;
+    var path = 'M20,'+startY+' C 90,'+startY+' 110,20 160,20 S 230,'+endY+' 300,'+endY;
+    svg.innerHTML =
+      '<line x1="20" y1="145" x2="300" y2="145" stroke="#E3E0D8"/>' +
+      '<path d="'+path+'" fill="none" stroke="#C96A2E" stroke-width="2.5"/>' +
+      '<circle cx="20" cy="'+startY+'" r="3.5" fill="#C96A2E"/>' +
+      '<circle cx="300" cy="'+endY+'" r="3.5" fill="#C96A2E"/>' +
+      '<text x="14" y="'+(startY+18)+'" fill="#6B716A" font-size="9" font-family="IBM Plex Mono">reagentes</text>' +
+      '<text x="250" y="'+(endY+18)+'" fill="#6B716A" font-size="9" font-family="IBM Plex Mono">produtos</text>' +
+      '<text x="140" y="14" fill="#6B716A" font-size="9" font-family="IBM Plex Mono">Ea</text>';
+  }
+  buttons.forEach(function(b){
+    b.addEventListener('click', function(){
+      buttons.forEach(function(x){x.classList.remove('active')});
+      b.classList.add('active');
+      draw(b.dataset.mode);
+      pair.classList.toggle('broken');
+      setTimeout(function(){pair.classList.toggle('broken')},900);
+    });
+  });
+  draw('exo');
+})();
+
+/* ---------- catalyst mini diagram (rapidez tab) ---------- */
+(function(){
+  var svg = document.getElementById('catDiagram');
+  var toggle = document.getElementById('catToggle');
+  var eaVal = document.getElementById('catEaVal');
+  function draw(active){
+    var peakY = active ? 55 : 15;
+    var path = 'M20,100 C 80,100 100,'+peakY+' 150,'+peakY+' S 220,70 280,70';
+    svg.innerHTML =
+      '<line x1="20" y1="115" x2="280" y2="115" stroke="#E3E0D8"/>' +
+      '<path d="'+path+'" fill="none" stroke="#8358B0" stroke-width="2.5"/>' +
+      '<text x="120" y="'+(peakY-6)+'" fill="#6B716A" font-size="9" font-family="IBM Plex Mono">Ea</text>';
+    eaVal.textContent = active ? '45 kJ/mol' : '80 kJ/mol';
+  }
+  toggle.addEventListener('change', function(){ draw(toggle.checked); });
+  draw(false);
+})();
+
+/* ---------- fragmentation demo (rapidez tab) ---------- */
+(function(){
+  var grid = document.getElementById('fragGrid');
+  var slider = document.getElementById('fragSlider');
+  var label = document.getElementById('fragLabel');
+  var area = document.getElementById('fragArea');
+  function render(n){
+    grid.style.gridTemplateColumns = 'repeat('+n+',1fr)';
+    grid.style.gridTemplateRows = 'repeat('+n+',1fr)';
+    grid.innerHTML = '';
+    for(var i=0;i<n*n;i++){ grid.innerHTML += '<div></div>'; }
+    label.textContent = n+'×'+n;
+    area.textContent = Math.round(100 + (n-1)*42) + '%';
+  }
+  slider.addEventListener('input', function(){ render(parseInt(slider.value)); });
+  render(1);
+})();
+
+/* ---------- shared particle engine ---------- */
+function ParticleSim(canvasId, opts){
+  var canvas = document.getElementById(canvasId);
+  var ctx = canvas.getContext('2d');
+  var W,H;
+  function resize(){ W=canvas.clientWidth; H=canvas.clientHeight; canvas.width=W*devicePixelRatio; canvas.height=H*devicePixelRatio; ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0); }
+  window.addEventListener('resize', resize);
+
+  var particles = [];
+  function makeParticle(){
+    var speed = opts.speed();
+    var ang = Math.random()*Math.PI*2;
+    return { x:Math.random()*W, y:Math.random()*H, vx:Math.cos(ang)*speed, vy:Math.sin(ang)*speed, r:5 };
+  }
+  function setCount(n){ while(particles.length<n) particles.push(makeParticle()); while(particles.length>n) particles.pop(); }
+
+  var effCount=0, totalCount=0, lastStat=performance.now();
+
+  function step(){
+    var wf = opts.widthFactor ? opts.widthFactor() : 1;
+    var Weff = W*wf;
+    var speedMul = opts.speed()/2.2;
+    particles.forEach(function(p){
+      p.x+=p.vx*speedMul; p.y+=p.vy*speedMul;
+      if(p.x<p.r||p.x>Weff-p.r) p.vx*=-1;
+      if(p.y<p.r||p.y>H-p.r) p.vy*=-1;
+      p.x=Math.max(p.r,Math.min(Weff-p.r,p.x)); p.y=Math.max(p.r,Math.min(H-p.r,p.y));
+    });
+    for(var i=0;i<particles.length;i++){
+      for(var j=i+1;j<particles.length;j++){
+        var a=particles[i], b=particles[j];
+        var dx=a.x-b.x, dy=a.y-b.y, dist=Math.sqrt(dx*dx+dy*dy);
+        if(dist < a.r+b.r+1 && (a._cool||0)<=0 && (b._cool||0)<=0){
+          totalCount++;
+          var energy = Math.hypot(a.vx,a.vy)+Math.hypot(b.vx,b.vy);
+          var effective = energy > opts.threshold();
+          if(effective){ effCount++; a.flash=1; b.flash=1; }
+          else { a.flashRed=1; b.flashRed=1; }
+          a._cool=20; b._cool=20;
+          var nx=dx/dist||0, ny=dy/dist||0;
+          a.vx+=nx*0.4; a.vy+=ny*0.4; b.vx-=nx*0.4; b.vy-=ny*0.4;
+        }
+        if(a._cool>0) a._cool--;
+        if(b._cool>0) b._cool--;
+      }
+    }
+    ctx.clearRect(0,0,W,H);
+    if(wf<1){ ctx.setLineDash([3,3]); ctx.strokeStyle='#C7C3B8'; ctx.beginPath(); ctx.moveTo(Weff,0); ctx.lineTo(Weff,H); ctx.stroke(); ctx.setLineDash([]); }
+    particles.forEach(function(p){
+      var color = opts.color;
+      if(p.flash){ color='#3F9E5F'; p.flash=0; } else if(p.flashRed){ color='#C24B3F'; p.flashRed=0; }
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,7); ctx.fillStyle=color; ctx.fill();
+    });
+    var now=performance.now();
+    if(now-lastStat>800){ opts.onStats(effCount,totalCount); effCount=0; totalCount=0; lastStat=now; }
+    requestAnimationFrame(step);
+  }
+  resize();
+  this.setCount = setCount;
+  this.particles = particles;
+  requestAnimationFrame(step);
+}
+
+/* ---------- factor 01: temperatura ---------- */
+(function(){
+  var t=document.getElementById('tempSlider'), tl=document.getElementById('tempLabel'), st=document.getElementById('statTemp');
+  var sim = new ParticleSim('simTemp',{ speed:function(){return 0.6+(t.value/100)*3.2;}, threshold:function(){return 3.4;}, color:'#2A7DA8', onStats:function(e){st.textContent=e;} });
+  sim.setCount(16);
+  t.addEventListener('input', function(){ tl.textContent=t.value+'%'; });
+})();
+
+/* ---------- factor 02: concentração ---------- */
+(function(){
+  var c=document.getElementById('concSlider'), cl=document.getElementById('concLabel'), st=document.getElementById('statConc');
+  var sim = new ParticleSim('simConc',{ speed:function(){return 1.6;}, threshold:function(){return 3.0;}, color:'#2A7DA8', onStats:function(e){st.textContent=e;} });
+  c.addEventListener('input', function(){ cl.textContent=c.value; sim.setCount(parseInt(c.value)); });
+  sim.setCount(16);
+})();
+
+/* ---------- factor 05: pressão ---------- */
+(function(){
+  var p=document.getElementById('pressSlider'), pl=document.getElementById('pressLabel'), st=document.getElementById('statPress');
+  var sim = new ParticleSim('simPress',{ speed:function(){return 1.8;}, threshold:function(){return 3.4;}, color:'#2A7DA8', widthFactor:function(){return 1-(p.value/100);}, onStats:function(e){st.textContent=e;} });
+  sim.setCount(18);
+  p.addEventListener('input', function(){ pl.textContent = p.value<25?'Baixa':(p.value<50?'Média':'Alta'); });
+})();
+
+/* ---------- tab 3: colisões ---------- */
+(function(){
+  var tempC=document.getElementById('tempC'), tempCLabel=document.getElementById('tempCLabel');
+  var catalyst=document.getElementById('catalyst');
+  var statEffPct=document.getElementById('statEffPct'), statEa=document.getElementById('statEa');
+  var sim = new ParticleSim('simColisoes', {
+    speed:function(){ return 0.6 + (tempC.value/100)*3.2; },
+    threshold:function(){ return catalyst.checked ? 2.6 : 4.2; },
+    color:'#8358B0',
+    onStats:function(eff,total){ var pct = total ? Math.round(100*eff/total) : 0; statEffPct.textContent = pct+'%'; }
+  });
+  sim.setCount(22);
+  tempC.addEventListener('input', function(){ tempCLabel.textContent = tempC.value+'%'; });
+  catalyst.addEventListener('change', function(){ statEa.textContent = catalyst.checked ? 'Ea reduzida' : 'Ea alta'; });
+})();
+</script>
+</body>
+</html>
