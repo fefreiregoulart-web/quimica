@@ -92,13 +92,14 @@ canvas{width:100%;height:210px;display:block;border-radius:8px;background:#F4F2E
 .questions-section { padding: 4vw 6vw; background: var(--bg); border-top: 1px dashed var(--line); }
 .questions-section h3 { font-size: 1.5rem; margin-bottom: 1.5rem; color: var(--ink); }
 .q-card { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 1.5rem; margin-bottom: 1.2rem; }
-.q-text { font-size: .95rem; color: var(--ink); margin-bottom: 1rem; white-space: pre-line; }
+.q-text { font-size: .95rem; color: var(--ink); margin-bottom: 1rem; white-space: pre-line; line-height: 1.5; }
 .q-actions { display: flex; gap: .8rem; }
 .q-btn { font-family: 'IBM Plex Mono', monospace; font-size: .75rem; padding: .6rem 1rem; border-radius: 6px; cursor: pointer; border: 1px solid var(--line); background: transparent; color: var(--ink-dim); transition: all .2s; }
 .q-btn:hover { background: rgba(0,0,0,.03); }
 .q-btn.active { border-color: var(--accent); color: var(--accent); background: rgba(0,0,0,.02); font-weight: 600; }
-.q-content { display: none; margin-top: 1rem; padding: 1rem; background: #F8F9FA; border-radius: 6px; font-size: .9rem; border-left: 3px solid var(--accent); color: #333; white-space: pre-line; }
+.q-content { display: none; margin-top: 1rem; padding: 1.2rem; background: #F8F9FA; border-radius: 6px; font-size: .95rem; border-left: 3px solid var(--accent); color: #454B44; white-space: pre-line; line-height: 1.6; }
 .q-content.show { display: block; }
+.q-content strong { color: var(--ink); }
 .q-table { font-family: 'IBM Plex Mono', monospace; font-size: 0.8rem; background: #f4f2ec; padding: 10px; border-radius: 5px; margin: 10px 0; }
 
 footer{padding:2.5rem 6vw 3rem;border-top:1px solid var(--line);color:var(--ink-dim);font-size:.76rem;font-family:'IBM Plex Mono',monospace}
@@ -168,8 +169,34 @@ footer{padding:2.5rem 6vw 3rem;border-top:1px solid var(--line);color:var(--ink-
           <button class="q-btn" data-target="q1-resp">Ver Resposta</button>
           <button class="q-btn" data-target="q1-reso">Ver Resolução</button>
         </div>
-        <div class="q-content" id="q1-resp"><strong>Resposta:</strong> (Disponível pelo professor/gabarito oficial)</div>
-        <div class="q-content" id="q1-reso"><strong>Resolução:</strong> 1. Calcular a massa de CH4; 2. Calcular o número de mols de CH4; 3. Escrever a equação de combustão do CH4; 4. Calcular o ΔH pelas energias de ligação (rompidas - formadas); 5. Multiplicar o ΔH pelo número de mols encontrado.</div>
+        <div class="q-content" id="q1-resp"><strong>Resposta:</strong> Alternativa D (5,3 × 10⁵ kJ).</div>
+        <div class="q-content" id="q1-reso"><strong>Resolução Passo a Passo:</strong>
+1. <strong>Descubra a massa total de GNV:</strong>
+   Através da densidade (d = m / V), calculamos a massa total.
+   Massa = 0,8 kg/m³ × 15 m³ = 12 kg (ou 12.000 g).
+
+2. <strong>Descubra a massa apenas de Metano (CH4):</strong>
+   O cilindro possui 90% de pureza.
+   Massa de CH4 = 12.000 g × 0,9 = 10.800 g.
+
+3. <strong>Calcule o número de mols de CH4:</strong>
+   n = massa / massa molar = 10.800 g / 16 g/mol = 675 mols de metano.
+
+4. <strong>Equacione a reação de combustão para calcular o ΔH:</strong>
+   CH4 + 2 O2 → CO2 + 2 H2O
+   - <em>Ligações rompidas (Reagentes - Absorvem energia):</em>
+     4 lig. C-H: 4 × 414 = 1656 kJ
+     2 lig. O=O: 2 × 498 = 996 kJ
+     Total absorvido = +2652 kJ
+   - <em>Ligações formadas (Produtos - Liberam energia):</em>
+     2 lig. C=O (no CO2): 2 × 799 = 1598 kJ
+     4 lig. H-O (em 2 moléculas de H2O): 4 × 460 = 1840 kJ
+     Total liberado = -3438 kJ
+   ΔH (por mol de CH4) = 2652 - 3438 = -786 kJ/mol.
+
+5. <strong>Calcule a energia total liberada na explosão:</strong>
+   Energia = 675 mols × 786 kJ/mol = 530.550 kJ.
+   Em notação científica, isso é aproximadamente <strong>5,3 × 10⁵ kJ</strong>.</div>
       </div>
 
       <div class="q-card">
@@ -180,8 +207,29 @@ footer{padding:2.5rem 6vw 3rem;border-top:1px solid var(--line);color:var(--ink-
           <button class="q-btn" data-target="q2-resp">Ver Resposta</button>
           <button class="q-btn" data-target="q2-reso">Ver Resolução</button>
         </div>
-        <div class="q-content" id="q2-resp"><strong>Resposta:</strong> (Disponível pelo professor/gabarito oficial)</div>
-        <div class="q-content" id="q2-reso"><strong>Resolução:</strong> Equação: CH4 + 2Cl2 → CH2Cl2 + 2HCl. Quebram-se 2 ligações C-H e 2 Cl-Cl. Formam-se 2 ligações C-Cl e 2 H-Cl. ΔH = Energia absorvida (quebra) - Energia liberada (formação).</div>
+        <div class="q-content" id="q2-resp"><strong>Resposta:</strong> Alternativa A (220 kJ).</div>
+        <div class="q-content" id="q2-reso"><strong>Resolução Passo a Passo:</strong>
+1. <strong>Escreva a equação balanceada da reação:</strong>
+   CH4 + 2 Cl2 → CH2Cl2 + 2 HCl
+
+2. <strong>Analise as ligações rompidas e formadas (Método Simplificado):</strong>
+   <em>Dica didática: Como o CH2Cl2 ainda preserva 2 ligações C-H do metano original intactas, não precisamos quebrar e formar a molécula inteira na conta. Vamos calcular apenas o que efetivamente reage:</em>
+   
+   - <em>Rompidas (Absorvem energia):</em>
+     Quebramos apenas 2 ligações C-H no metano e 2 moléculas de Cl-Cl.
+     2 lig. C-H = 2 × 410 = +820 kJ
+     2 lig. Cl-Cl = 2 × 240 = +480 kJ
+     Total Absorvido = +1300 kJ
+
+   - <em>Formadas (Liberam energia):</em>
+     O carbono forma 2 novas ligações C-Cl e surgem 2 moléculas de HCl.
+     2 lig. C-Cl = 2 × 330 = 660 kJ
+     2 lig. H-Cl = 2 × 430 = 860 kJ
+     Total Liberado = -1520 kJ
+
+3. <strong>Calcule o saldo de entalpia (ΔH):</strong>
+   ΔH = +1300 + (-1520) = -220 kJ/mol.
+   O sinal negativo indica que foram liberados <strong>220 kJ</strong>.</div>
       </div>
 
       <div class="q-card">
@@ -193,8 +241,27 @@ footer{padding:2.5rem 6vw 3rem;border-top:1px solid var(--line);color:var(--ink-
           <button class="q-btn" data-target="q3-resp">Ver Resposta</button>
           <button class="q-btn" data-target="q3-reso">Ver Resolução</button>
         </div>
-        <div class="q-content" id="q3-resp"><strong>Resposta:</strong> (Disponível pelo professor/gabarito oficial)</div>
-        <div class="q-content" id="q3-reso"><strong>Resolução:</strong> Equacionar a soma das energias rompidas e formadas, igualando ao ΔH fornecido (-44 kJ/mol). A única incógnita será o valor da ligação H-Cl. Resolva a equação para encontrar o valor.</div>
+        <div class="q-content" id="q3-resp"><strong>Resposta:</strong> Alternativa E (432 kJ/mol).</div>
+        <div class="q-content" id="q3-reso"><strong>Resolução Passo a Passo:</strong>
+Neste exercício, nós já temos o ΔH e queremos descobrir o valor de uma das ligações. Montamos a equação global: ΔH = Energia Absorvida - Energia Liberada.
+
+1. <strong>Energia Absorvida (Quebra dos Reagentes):</strong>
+   (1 lig. C-H) + (3 lig. C-Cl) + (2 lig. H-F)
+   413 + 3(330) + 2(568)
+   413 + 990 + 1136 = +2539 kJ.
+
+2. <strong>Energia Liberada (Formação dos Produtos):</strong>
+   (1 lig. C-H) + (1 lig. C-Cl) + (2 lig. C-F) + 2(lig. H-Cl)
+   413 + 330 + 2(488) + 2(x)
+   413 + 330 + 976 + 2x = 1719 + 2x
+
+3. <strong>Resolvendo para 'x' usando o ΔH total (-44 kJ):</strong>
+   ΔH = Absorvida - Liberada
+   -44 = 2539 - (1719 + 2x)
+   -44 = 820 - 2x
+   2x = 820 + 44
+   2x = 864
+   x = 864 / 2 = <strong>432 kJ/mol</strong>.</div>
       </div>
       
       <div class="q-card">
@@ -207,21 +274,58 @@ footer{padding:2.5rem 6vw 3rem;border-top:1px solid var(--line);color:var(--ink-
           <button class="q-btn" data-target="q4-resp">Ver Resposta</button>
           <button class="q-btn" data-target="q4-reso">Ver Resolução</button>
         </div>
-        <div class="q-content" id="q4-resp"><strong>Resposta:</strong> a) Estrutura com N central (1 par livre) e 3 Cl ao redor. b) 2 NCl3 → N2 + 3 Cl2 (Nóx de +3 para 0). c) Reação exotérmica.</div>
-        <div class="q-content" id="q4-reso"><strong>Resolução:</strong> Na letra C, rompem-se 6 ligações N-Cl (absorve 1200 kJ). Formam-se 1 N≡N e 3 Cl-Cl (libera 940 + 720 = 1660 kJ). ΔH = 1200 - 1660 = -460 kJ (Exotérmica).</div>
+        <div class="q-content" id="q4-resp"><strong>Resposta:</strong>
+a) N central cercado por três átomos de Cl, com um par de elétrons livres no Nitrogênio.
+b) 2 NCl3 → N2 + 3 Cl2. O nox do Nitrogênio vai de +3 (reagente) para 0 (produto).
+c) ΔH = -460 kJ. A reação é exotérmica.</div>
+        <div class="q-content" id="q4-reso"><strong>Resolução Passo a Passo:</strong>
+<strong>Item B (Dica do Nox):</strong> O Nitrogênio (N, Eletronegatividade ~3.04) é muito ligeiramente menos eletronegativo que o Cloro (Cl, Eletronegatividade ~3.16). Portanto, nas 3 ligações, os elétrons são estatisticamente atraídos para o Cloro. Isso deixa o N com Nox <strong>+3</strong> e cada Cl com Nox <strong>-1</strong>. No N2 (substância simples), o Nox é zero.
+
+<strong>Item C (Cálculo do ΔH):</strong>
+1. <strong>Equação balanceada:</strong> 2 NCl3 → N2 + 3 Cl2
+2. <strong>Energia Absorvida (Reagentes quebrando):</strong>
+   No NCl3, o Nitrogênio faz 3 ligações simples com os Cloros. Como a estequiometria pede 2 mols, quebramos 6 ligações N-Cl no total.
+   6 × 200 kJ = +1200 kJ.
+3. <strong>Energia Liberada (Produtos formando):</strong>
+   Temos a formação de 1 mol de N2 (ligação tripla N≡N) e 3 mols de Cl2 (ligação simples Cl-Cl).
+   1 × 940 = 940 kJ
+   3 × 240 = 720 kJ
+   Total formado = 940 + 720 = -1660 kJ.
+4. <strong>Cálculo do ΔH:</strong>
+   ΔH = +1200 - 1660 = <strong>-460 kJ</strong>. Como o valor final é negativo, a energia foi liberada para o ambiente, tornando a decomposição <strong>exotérmica</strong>.</div>
       </div>
       
       <div class="q-card">
-        <div class="q-text"><strong>5. (Enem PPL)</strong> O gás hidrogênio é considerado um ótimo combustível - o único produto da combustão desse gás é o vapor de água, como mostrado na equação química: 2H2(g) + O2(g) → 2H2O(g).
+        <div class="q-text"><strong>5. (Enem PPL)</strong> O gás hidrogênio é considerado um ótimo combustível - o único produto da combustão desse gás é o vapor de água, como mostrado na equação química: 
+        2 H2(g) + O2(g) → 2 H2O(g).
         Um cilindro contém 1kg de hidrogênio e todo esse gás foi queimado.
-        (Energias: H-H = 437, H-O = 463, O=O = 494).
+        (Energias de ligação em kJ/mol: H-H = 437, H-O = 463, O=O = 494).
         Qual é a variação da entalpia, em quilojoule, da reação de combustão do hidrogênio contido no cilindro?</div>
         <div class="q-actions">
           <button class="q-btn" data-target="q5-resp">Ver Resposta</button>
           <button class="q-btn" data-target="q5-reso">Ver Resolução</button>
         </div>
-        <div class="q-content" id="q5-resp"><strong>Resposta:</strong> (Disponível pelo professor/gabarito oficial)</div>
-        <div class="q-content" id="q5-reso"><strong>Resolução:</strong> 1. Calcule o ΔH para a equação balanceada dada (2 mols de H2). 2. Calcule quantos mols existem em 1kg (1000g) de H2 (massa molar 2g/mol = 500 mols). 3. Faça uma regra de três para descobrir a energia liberada por 500 mols.</div>
+        <div class="q-content" id="q5-resp"><strong>Resposta:</strong> Alternativa B (- 121.000 kJ).</div>
+        <div class="q-content" id="q5-reso"><strong>Resolução Passo a Passo:</strong>
+1. <strong>Calcule o ΔH para a equação-base fornecida (que processa 2 mols de H2):</strong>
+   - <em>Absorvido para quebrar os reagentes:</em>
+     2 lig. H-H = 2 × 437 = +874 kJ
+     1 lig. O=O = 1 × 494 = +494 kJ
+     Total absorvido = +1368 kJ
+   - <em>Liberado na formação dos produtos:</em>
+     Uma molécula de H2O tem o formato H-O-H (duas ligações). Como formamos 2 mols de água, teremos um total de 4 ligações H-O formadas.
+     4 lig. H-O = 4 × 463 = -1852 kJ
+   - ΔH da equação = 1368 - 1852 = <strong>-484 kJ</strong> (liberados a cada 2 mols de H2 queimados).
+
+2. <strong>Descubra quantos mols há no cilindro de 1 kg:</strong>
+   1 kg = 1000 gramas.
+   Massa molar do gás hidrogênio (H2) = 2 g/mol.
+   n = 1000 g / 2 g/mol = 500 mols de H2.
+
+3. <strong>Faça a proporção final (Regra de três):</strong>
+   Se 2 mols de H2 liberam ----- -484 kJ
+   500 mols de H2 liberarão --- 'X' kJ
+   X = (500 × -484) / 2 = 250 × -484 = <strong>- 121.000 kJ</strong>.</div>
       </div>
     </div>
   </section>
@@ -290,8 +394,10 @@ footer{padding:2.5rem 6vw 3rem;border-top:1px solid var(--line);color:var(--ink-
           <button class="q-btn" data-target="qc1-resp">Ver Resposta</button>
           <button class="q-btn" data-target="qc1-reso">Ver Resolução</button>
         </div>
-        <div class="q-content" id="qc1-resp"><strong>Resposta:</strong> diminui a energia de ativação da reação.</div>
-        <div class="q-content" id="qc1-reso"><strong>Resolução:</strong> O catalisador atua criando um caminho alternativo para a reação, o qual exige uma menor Energia de Ativação (Ea). Com uma barreira energética menor, um número maior de partículas consegue reagir, aumentando a velocidade.</div>
+        <div class="q-content" id="qc1-resp"><strong>Resposta:</strong> Alternativa B (diminui a energia de ativação da reação).</div>
+        <div class="q-content" id="qc1-reso"><strong>Resolução Didática:</strong> 
+O catalisador atua modificando o <em>mecanismo</em> da reação, o que significa que ele cria um "caminho alternativo" para os reagentes se transformarem em produtos. Esse novo caminho exige uma <strong>Energia de Ativação (Ea) inferior</strong> à reação original não-catalisada. 
+Com uma barreira energética menor, um número muito maior de partículas consegue superá-la em temperatura ambiente, causando o aumento rápido da velocidade da reação. Vale lembrar que o catalisador <em>não</em> altera o calor (ΔH) da reação, não muda a temperatura do sistema e nunca é consumido no processo.</div>
       </div>
 
       <div class="q-card">
@@ -313,8 +419,12 @@ footer{padding:2.5rem 6vw 3rem;border-top:1px solid var(--line);color:var(--ink-
           <button class="q-btn" data-target="qc3-resp">Ver Resposta</button>
           <button class="q-btn" data-target="qc3-reso">Ver Resolução</button>
         </div>
-        <div class="q-content" id="qc3-resp"><strong>Resposta:</strong> (Disponível pelo professor/gabarito oficial)</div>
-        <div class="q-content" id="qc3-reso"><strong>Resolução:</strong> Grânulos vs Lâminas remete à superfície de contato. Aquecimento remete à temperatura. Microorganismos agem como catalisadores biológicos (enzimas). Dissolver efervescente envolve íons livres (concentração/estado).</div>
+        <div class="q-content" id="qc3-resp"><strong>Resposta:</strong> Alternativa C (3, 1, 4, 2).</div>
+        <div class="q-content" id="qc3-reso"><strong>Resolução Passo a Passo:</strong>
+- <strong>(3) Superfície de contato:</strong> Grânulos de Mg (magnésio) são pedaços pequenos, enquanto as lâminas formam blocos grossos e únicos. Os grânulos expõem muito mais área para o ácido interagir.
+- <strong>(1) Temperatura:</strong> Quando aquecemos o leite, nós estamos literalmente aumentando a temperatura do sistema, o que aumenta a energia cinética e acelera o metabolismo das bactérias responsáveis por coalhá-lo.
+- <strong>(4) Catalisador:</strong> Microorganismos (como as leveduras na uva) produzem enzimas, que atuam quimicamente como excelentes <em>catalisadores biológicos</em> para as reações de fermentação.
+- <strong>(2) Concentração dos reagentes:</strong> Ao dissolver um efervescente em um copo de água (fase aquosa densa) ao invés de deixá-lo exposto ao ar úmido (onde as partículas de água no ar são muito dispersas), você permite a mobilidade e o encontro muito mais concentrado e volumoso dos íons, acelerando a efervescência.</div>
       </div>
 
       <div class="q-card">
@@ -324,18 +434,26 @@ footer{padding:2.5rem 6vw 3rem;border-top:1px solid var(--line);color:var(--ink-
           <button class="q-btn" data-target="qc5-resp">Ver Resposta</button>
           <button class="q-btn" data-target="qc5-reso">Ver Resolução</button>
         </div>
-        <div class="q-content" id="qc5-resp"><strong>Resposta:</strong> (Disponível pelo professor/gabarito oficial)</div>
-        <div class="q-content" id="qc5-reso"><strong>Resolução:</strong> Beber líquidos dilui o suco gástrico, diminuindo a concentração e, consequentemente, a velocidade. Mastigar fragmenta o alimento, aumentando a superfície de contato e a velocidade.</div>
+        <div class="q-content" id="qc5-resp"><strong>Resposta:</strong> Alternativa C (diminuição - aumento - aumenta).</div>
+        <div class="q-content" id="qc5-reso"><strong>Resolução Didática:</strong>
+1. <strong>Ingestão de líquidos:</strong> Beber água em excesso durante a refeição dilui o suco gástrico. Ou seja, você diminui a <em>concentração</em> molar do ácido e das enzimas no estômago, causando a <strong>diminuição</strong> da probabilidade de colisões efetivas e, portanto, reduzindo a velocidade da reação química digestiva.
+2. <strong>Mastigação:</strong> O ato de triturar quebra o alimento em pedaços diminutos. Isso <strong>aumenta</strong> a velocidade da reação pois, mecanicamente, a <strong>superfície de contato</strong> livre (a área exposta das bordas dos alimentos) para interagir com o ácido gástrico <strong>aumenta</strong> drasticamente.</div>
       </div>
       
       <div class="q-card">
-        <div class="q-text"><strong>10. (Udesc)</strong> O gráfico refere-se ao diagrama energético de uma reação química, no qual se veem destacados dois caminhos de reação [Gráfico fornecido no material original indicando um pico maior e um menor]. Após uma análise das entalpias dos reagentes, dos produtos e dos valores, pode-se afirmar que a:</div>
+        <div class="q-text"><strong>10. (Udesc)</strong> O gráfico refere-se ao diagrama energético de uma reação química, no qual se veem destacados dois caminhos de reação [Gráfico fornecendo picos maiores (sem catalisador) e menores (com catalisador)]. Após uma análise das entalpias dos reagentes, dos produtos e dos valores, pode-se afirmar que a:</div>
         <div class="q-actions">
           <button class="q-btn" data-target="qc10-resp">Ver Resposta</button>
           <button class="q-btn" data-target="qc10-reso">Ver Resolução</button>
         </div>
-        <div class="q-content" id="qc10-resp"><strong>Resposta:</strong> (Disponível pelo professor/gabarito oficial)</div>
-        <div class="q-content" id="qc10-reso"><strong>Resolução:</strong> Analise se a energia dos produtos é maior (endotérmica) ou menor (exotérmica) que a dos reagentes. O catalisador sempre representa a curva de menor energia de ativação (menor pico). O ΔH não muda com o uso de catalisadores.</div>
+        <div class="q-content" id="qc10-resp"><strong>Resposta:</strong> Alternativa C (A presença do catalisador diminui a energia de ativação de i para ii e mantém constante o ΔH da reação representada por iv).</div>
+        <div class="q-content" id="qc10-reso"><strong>Resolução Didática:</strong>
+Analisando as curvas clássicas de cinética química: 
+- O eixo de energia mostra os Reagentes ($H_R$) em um nível inicial.
+- A diferença de energia entre a linha dos Reagentes e o topo do "morro" representa a Energia de Ativação (Ea). 
+- O <strong>caminho I (pico maior, representado pela seta <em>i</em>)</strong> é a montanha mais alta, exigindo mais energia, configurando a reação <em>sem</em> catalisador. 
+- O <strong>caminho II (pico menor, representado pela seta <em>ii</em>)</strong> é a via mais curta, gerada pela presença do catalisador.
+Portanto, a única função do catalisador ilustrada ali é diminuir a barreira de Energia de Ativação de <em>i</em> para <em>ii</em>, garantindo que o saldo final energético da reação (o ΔH, representado pela letra <em>iv</em> na diferença entre o patamar de início e fim) permaneça estritamente inalterado.</div>
       </div>
       
       <div class="q-card">
@@ -349,8 +467,13 @@ footer{padding:2.5rem 6vw 3rem;border-top:1px solid var(--line);color:var(--ink-
           <button class="q-btn" data-target="qc17-resp">Ver Resposta</button>
           <button class="q-btn" data-target="qc17-reso">Ver Resolução</button>
         </div>
-        <div class="q-content" id="qc17-resp"><strong>Resposta:</strong> (Disponível pelo professor/gabarito oficial - Soma das corretas)</div>
-        <div class="q-content" id="qc17-reso"><strong>Resolução:</strong> Avalie afirmativa por afirmativa. A 01 está correta (teoria cinética). A 04 está incorreta (menos ligações para romper costuma facilitar/acelerar). A 08 está incorreta (reações não elementares possuem ordens que não coincidem com os coeficientes globais). A 16 está correta.</div>
+        <div class="q-content" id="qc17-resp"><strong>Resposta:</strong> A soma das alternativas corretas é 19 (01 + 02 + 16).</div>
+        <div class="q-content" id="qc17-reso"><strong>Resolução Passo a Passo:</strong>
+- <strong>(01) Correta.</strong> Aquecer um sistema entrega energia cinética às moléculas. Ao vibrar e se mover mais rápido, uma parcela muito maior da população de moléculas consegue superar a régua da Energia de Ativação.
+- <strong>(02) Correta.</strong> O conceito formal de "molecularidade" na físico-química é exatamente a contagem estrita de quantas espécies interagem ou colidem simultaneamente em um choque único (etapa elementar).
+- <strong>(04) Incorreta.</strong> Se houver <em>menos</em> ligações a serem rompidas, a barreira inicial costuma ser menos custosa, fazendo com que a reação tenda a ser muito mais <em>rápida</em>, e não mais lenta.
+- <strong>(08) Incorreta.</strong> As ordens da lei de velocidade diferirem dos coeficientes da equação global balanceada não é um erro; isso apenas indica de forma precisa que a reação é <em>não elementar</em> (ou seja, ocorre em várias etapas fracionadas, onde a etapa mais lenta dita as regras).
+- <strong>(16) Correta.</strong> Esta é a definição exata e perfeita do funcionamento físico do catalisador.</div>
       </div>
     </div>
   </section>
@@ -383,8 +506,10 @@ footer{padding:2.5rem 6vw 3rem;border-top:1px solid var(--line);color:var(--ink-
           <button class="q-btn" data-target="qco13-resp">Ver Resposta</button>
           <button class="q-btn" data-target="qco13-reso">Ver Resolução</button>
         </div>
-        <div class="q-content" id="qco13-resp"><strong>Resposta:</strong> (Disponível pelo professor/gabarito oficial)</div>
-        <div class="q-content" id="qco13-reso"><strong>Resolução:</strong> Para que uma combustão se inicie (apesar de termodinamicamente favorável), as colisões entre as moléculas precisam atingir a Energia de Ativação. Isso é fornecido por uma faísca ou chama inicial. Depois de iniciada, a reação exotérmica libera calor suficiente para manter as colisões subsequentes acima da energia de ativação.</div>
+        <div class="q-content" id="qco13-resp"><strong>Resposta:</strong> Alternativa E (a reação precisa de uma energia de ativação para começar).</div>
+        <div class="q-content" id="qco13-reso"><strong>Resolução Didática:</strong>
+Embora a união entre os carbonos da árvore e o oxigênio do ar seja termodinamicamente muito favorável, ela não ocorre sozinha por estar impedida por uma barreira cinética forte chamada <strong>Energia de Ativação</strong>. Para as ligações antigas começarem a ceder, requer-se uma pancada energética contundente.
+Assim que você fornece um "empurrão" inicial (através do calor concentrado de um isqueiro ou fricção), você supera a energia de ativação. Por ser uma reação altamente <strong>exotérmica</strong>, assim que o primeiro pedaço queima, ele libera luz e uma quantidade imensa de calor. Esse calor residual atua garantindo a energia de ativação para todas as partículas vizinhas da madeira, gerando um efeito cascata que sustenta o fogo.</div>
       </div>
       
       <div class="q-card">
@@ -393,20 +518,28 @@ footer{padding:2.5rem 6vw 3rem;border-top:1px solid var(--line);color:var(--ink-
           <button class="q-btn" data-target="qco18-resp">Ver Resposta</button>
           <button class="q-btn" data-target="qco18-reso">Ver Resolução</button>
         </div>
-        <div class="q-content" id="qco18-resp"><strong>Resposta:</strong> (Disponível pelo professor/gabarito oficial)</div>
-        <div class="q-content" id="qco18-reso"><strong>Resolução:</strong> Apenas os choques eficazes (com energia e geometria corretas) resultam em reação. Fatores como temperatura, concentração e superfície de contato aumentam o número total de colisões ou a energia das mesmas, incrementando a probabilidade de choques efetivos.</div>
+        <div class="q-content" id="qco18-resp"><strong>Resposta:</strong> Alternativa C (Entre os fatores que influenciam na velocidade de uma reação encontram-se a temperatura, a superfície de contato e a concentração dos reagentes).</div>
+        <div class="q-content" id="qco18-reso"><strong>Resolução Didática:</strong>
+Analisando os principais erros e pegadinhas das alternativas (invisíveis aqui, mas explicadas para estudo):
+- Uma alternativa diz que o aumento da superfície de contato <em>diminui</em> a velocidade. Isso é falso; na verdade, triturar um comprimido acelera a reação porque expõe mais área para choques.
+- Outra afirma que <em>diminuir</em> a concentração aumenta a velocidade. Falso; menos moléculas no mesmo espaço geram um "vazio", diminuindo a probabilidade de encontros, afundando a taxa de colisões efetivas.
+- Inversões do efeito térmico: afirmar que o resfriamento (abaixar a temperatura) acelera as reações é falso, pois tirar calor retira a energia cinética vital para o choque frontal violento.
+Restando apenas a premissa de que a concentração, o calor e a superfície são, de fato, os governantes do volume de choques efetivos.</div>
       </div>
 
       <div class="q-card">
         <div class="q-text"><strong>20. (Ufrgs)</strong> Uma professora, ao introduzir o conceito de energia de ativação, projetou em sua aula o seguinte modelo teórico.
-        [Esquema: Colisão conectada a "Eficaz: Quebra de Ligações", "Energia Suficiente (Ea)", "Agitação Térmica" e "Orientação Adequada"]
+        [O esquema da lousa apresentava no centro um quadro "COLISÃO", rodeado pelas condições vitais: "Eficaz: Quebra de Ligações", "Energia Suficiente (Ea)", "Agitação Térmica" e "Orientação Adequada"].
         As teorias que sustentam esse modelo teórico, para explicar a influência de certos fatores na velocidade de uma reação química, são as:</div>
         <div class="q-actions">
           <button class="q-btn" data-target="qco20-resp">Ver Resposta</button>
           <button class="q-btn" data-target="qco20-reso">Ver Resolução</button>
         </div>
-        <div class="q-content" id="qco20-resp"><strong>Resposta:</strong> (Disponível pelo professor/gabarito oficial)</div>
-        <div class="q-content" id="qco20-reso"><strong>Resolução:</strong> O modelo baseia-se na "Teoria das Colisões" (que exige geometria e energia mínimas) e no conceito do "Complexo Ativado" (estado de transição de alta energia onde ligações antigas se rompem e novas se formam).</div>
+        <div class="q-content" id="qco20-resp"><strong>Resposta:</strong> Alternativa A (Teoria das colisões e Teoria do complexo ativado).</div>
+        <div class="q-content" id="qco20-reso"><strong>Resolução Didática:</strong>
+O mapa mental estruturado pela professora aborda os dois pilares magnos da cinética clássica do ensino médio:
+1. <strong>Teoria das Colisões:</strong> Vertente que estabelece a exigência primária de que reagentes devem se chocar de frente, possuindo uma orientação (geometria) exata e energia cinética suficiente para desencadear a ruptura das moléculas. 
+2. <strong>Teoria do Complexo Ativado:</strong> Relacionada ao ápice desse choque, no exato momento em que a barreira de "Energia de Ativação (Ea)" é vencida. As partículas formam um intermédio muito instável de alta energia (uma fusão momentânea onde ligações velhas quebram e novas nascem simultaneamente) que é devidamente batizado na química de "Complexo Ativado".</div>
       </div>
     </div>
   </section>
